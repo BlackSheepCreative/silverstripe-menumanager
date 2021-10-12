@@ -23,11 +23,14 @@ class MenuManagerTemplateProvider implements TemplateGlobalProvider
      */
     public static function MenuSet($name)
     {
+        $filters = ['Name' => $name];
+
+        //Subsite check
+        if (class_exists('SilverStripe\Subsites\State\SubsiteState\SubsiteState')) {
+            $filters["SubsiteID"] = SilverStripe\Subsites\State\SubsiteState\SubsiteState::singleton()->getSubsiteId();
+        }
+
         return MenuSet::get()
-            ->filter(
-                [
-                    'Name' => $name
-                ]
-            )->first();
+            ->filter($filters)->first();
     }
 }
