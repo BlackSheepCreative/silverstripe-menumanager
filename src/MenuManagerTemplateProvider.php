@@ -26,8 +26,8 @@ class MenuManagerTemplateProvider implements TemplateGlobalProvider
         $filters = ['Name' => $name];
 
         //Subsite check
-        if (class_exists('SilverStripe\Subsites\State\SubsiteState\SubsiteState')) {
-            $filters["SubsiteID"] = SilverStripe\Subsites\State\SubsiteState\SubsiteState::singleton()->getSubsiteId();
+        if (class_exists('SilverStripe\Subsites\State\SubsiteState')) {
+            $filters["SubsiteID"] = \SilverStripe\Subsites\State\SubsiteState::singleton()->getSubsiteId();
         }
 
         return MenuSet::get()
